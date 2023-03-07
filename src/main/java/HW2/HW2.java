@@ -1,39 +1,23 @@
 package HW2;
-//1. Напишите метод, который принимает на вход строку (String)
-//и определяет является ли строка палиндромом (возвращает boolean значение).
-// aba == aba
-import java.util.Scanner;
-
-
-
+//Напишите метод, который составит строку,
+//состоящую из 100 повторений слова TEST и метод,
+//который запишет эту строку в простой текстовый файл,
+//обработайте исключения.
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 public class HW2 {
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter a num: ");
-        String str = in.next();
-        boolean palindrom = Palindrom(str);
-        System.out.println(palindrom);
+        writerFile();
     }
-
-    private static boolean Palindrom(String word) {
-        int counter = 0;
-        int i = 0;
-        int j = word.length() - 1;
-        char[] charArray = word.toCharArray();
-        while(counter < word.length()) {
-            counter++;
-            if(charArray[i] == charArray[j]) {
-                ++i;
-                --j;
-            } else {
-                return false;
-            }
-
+    private static void writerFile() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < 100 + 1; i++) {
+            sb.append(" TEST " );
         }
-        return true;
-
-
-
+        try(PrintWriter pw = new PrintWriter("G:\\JavaHomeWorks\\GB_Java_seminars\\src\\main\\resources\\files\\file.txt")) {
+            pw.print(sb);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
-
 }
